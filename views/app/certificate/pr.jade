@@ -1,0 +1,14 @@
+extends ../../layout.jade
+block contenido
+	script.
+		var data = ["hola"]; 
+		function add_element(){data.push(document.getElementById("t1").value);document.getElementById("t1").value='';console.log(data)}
+
+
+	div
+	input(type="text" id="t1")
+	button(id="" onclick="add_element()") add
+
+	ul
+		each val in {data}
+			li= val

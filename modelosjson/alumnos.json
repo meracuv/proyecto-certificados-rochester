@@ -1,0 +1,38 @@
+{
+	"_id": "1234567890",
+	"id estudiante"
+	"alumno": {
+		"nombre": "Andres",
+		"apellido": "Valdes"
+	},
+	"curso": "once",
+	"año": "2015",
+	"notas": [
+				{
+					"area": "idiomas",
+					"dependencias": [
+										{
+											"asignatura":"ingles",
+											"calificacion": "4.5"
+										},
+										{
+											"asignatura":"español",
+											"calificacion": "5.0"
+										}
+									]
+				},
+				{
+					"area":"edu.fisica y deporte",
+					"dependencias":[
+										{
+											"asignatura":"educacion fisica",
+											"calificacion":"4.3"
+										},
+										{
+											"asignatura":"natacion",
+											"calificacion":"5.0"
+										}
+									]
+				}
+			]
+}
