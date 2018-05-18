@@ -1,0 +1,37 @@
+{ "_id": "5aba7ef92db5a20599b5cd85",
+  "id_student": "1234567890",
+  "name": "Michael",
+  "lastname": "Valdes",
+  "__v": 0,
+  "years":
+          [
+            {
+              "year": "2011-2012",
+               "course": "Transición",
+               "_id": "5aba7f222db5a20599b5cd86",
+               "areas":
+                        [
+                          { 
+                            "_id": "5aba7f362db5a20599b5cd87",
+                            "area": "Matematicas",
+                            "subjects": 
+                                        [
+                                          { 
+                                            "_id": "5aba7f362db5a20599b5cd88",
+                                            "subject": "Trigonometria",
+                                            "qualification": 10,
+                                          }
+                                        ],
+                          }
+                        ]
+            } 
+          ],
+
+  "creator":
+            { 
+              "_id": "5a1d53a2e8612902034c17a0",
+               "email": "cacum22@hotmail.com",
+               "password": "contrasena",
+               "__v": 0 
+            } 
+}

@@ -62,7 +62,7 @@ app.post("/users",function(req,res){
 		                });
 	
 	user.save().then(function(us){
-	res.send("Guardamos tus datos correctamente");
+		res.redirect("/login")
 	},function(err){
 		console.log(String(err));//Impresion en la consola de los errores
 		res.send("Hubo un error al guardar el usuario");
@@ -70,14 +70,26 @@ app.post("/users",function(req,res){
 
 });
 
-app.post("/sessions",function(req,res){
+app.post("/sessions",function(req,res) {
+  const { email, password } = req.body
 
-	User.findOne({email:req.body.email,password:req.body.password},function(err,user){
-		req.session.user_id = user._id;
-		res.redirect("/app");
-	});
+  if (!email || !password) {
+    // redirect el usuario o envia un mensaje de error
+    // falta email o password
+    return res.redirect("/login?error=INVALID EMAIL OR PASSWORD")
+  }
 
-});
+  User.findOne({email: email, password: password}, function(err, user) {
+    if (err || !user) {
+      // redirect el usuario...
+      // ha occurido un error o el usuario no existe
+      return res.redirect("/login?message=INVALID USER")  
+    }
+
+    req.session.user_id = user._id
+    res.redirect("/app")
+  })
+})
 
 app.use("/app",session_middleware);
 app.use("/app",router_app);
