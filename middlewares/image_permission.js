@@ -10,9 +10,9 @@ module.exports = function(image,req,res){
 
 	if(image.creator._id.toString() == res.locals.user._id){
 		//Esta imagen yo la subí
-		return true; 
+		return true;
 	}
 
 	return false;
-	
+
 }

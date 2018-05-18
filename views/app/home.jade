@@ -1,16 +1,18 @@
 extends ../layout.jade
 block contenido
-	div(id="imagenes")
-		for imagen in imagenes
-			div(class="img-container")
-				a(href="/app/imagenes/#{imagen.id}")
-					h2= imagen.title
-				p Por #{imagen.creator.email}
-
-
+	div
+		.img-container
+			form(class="m-0" action="")
+				input(id="search" class="form-control mr-2 tr" type="text" placeholder="Buscar")
+			#container
+				for imagen in imagenes
+					a(href="/app/imagenes/#{imagen.id}")
+						container
+							p= imagen.id_student
+							h4= imagen.name+" "+imagen.lastname
 	script(id="image-template" type="text/x-handlebars-template")
-		div(class="img-container")
+		.img-container
 			a(href="/app/imagenes/{{id}}")
-				h2 {{title}}
-			img(src="/public/imagenes/{{id}}.{{extension}}",class="main-img")
+				h2 {{name}}
 	script(src="/public/js/client.js")
+	script(src="/public/js/search.js")

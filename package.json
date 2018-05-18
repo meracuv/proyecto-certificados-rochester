@@ -20,12 +20,15 @@
     "express-session": "^1.15.6",
     "express-sessions": "^1.0.6",
     "formidable": "^1.1.1",
+    "html2canvas": "^1.0.0-alpha.12",
     "jade": "^1.11.0",
+    "jsreport": "^1.10.0",
     "method-override": "^2.3.10",
     "mongod": "^2.0.0",
     "mongoose": "^4.13.9",
     "pug": "^2.0.0-rc.4",
     "redis": "^2.8.0",
+    "request": "^2.85.0",
     "socket.io": "^2.0.4"
   }
 }

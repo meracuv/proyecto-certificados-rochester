@@ -24,3 +24,12 @@ html(lang='es')
 							input(type="submit" value="Entrar" class="btn btn-primary")
 						div(class="col-xs-12 col-sm-6 text-right")
 							a(href="/signup") No tengo cuenta
+	script.
+		var validate = ("login?message=INVALID%20USER");
+		var validate2 = ("login?error=INVALID%20EMAIL%20OR%20PASSWORD");
+		var url = location.href.split("/")[location.href.split("/").length - 1];
+		if (validate == url){
+			alert("Usuario o contraseña invalidos");
+		}else if(validate2 == url){
+			alert("Por favor ingrese sus datos para iniciar sesión");
+		}
