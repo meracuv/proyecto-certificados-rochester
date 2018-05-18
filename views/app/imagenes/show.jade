@@ -1,0 +1,367 @@
+extends ../../layout.jade
+block contenido
+	br
+	.col-md-8.container-fluid
+		.row.long-line
+			.col-md-12
+				h3
+					b
+						i= imagen.name+" "+imagen.lastname
+				h4
+					i= imagen.id_student
+			.col-md-12
+				a(href="" data-toggle="modal" data-target="#editar#{imagen._id}" class="right-space") Editar
+				div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="editar#{imagen._id}")
+					div(class="modal-dialog" role="document")
+						.modal-content
+							.modal-header
+								button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+									span(aria-hidden="true") ×
+							.modal-body
+								.card.p-5.bg-light.text-secondary.border-secondary.border
+									.card-body
+										h1(class="mb-4") Editar Estudiante
+										form(action="/app/imagenes/#{imagen._id}?_method=PUT" method="POST" enctype="multipart/form-data")
+											input(type="hidden" value="PUT" name="_method")
+											.form-group
+												label(for="name") Nombre
+												input(type="text" name="name" placeholder="Nombre" id="name" class="form-control" onKeyUp="this.value=this.value.toUpperCase();" value="#{imagen.name}")
+											.form-group
+												label(for="lastname") Apellido
+												input(type="text" name="lastname" placeholder="Apellido" id="lastname" class="form-control" onKeyUp="this.value=this.value.toUpperCase();" value="#{imagen.lastname}")
+											.form-group
+												label(for="id_student") Id
+												input(type="number" name="id_student" placeholder="Id" id="id_student" class="form-control" value="#{imagen.id_student}" onkeypress="return valida(event)")
+											button(type="submit" class="btn btn-secondary") Guardar
+							.modal-footer
+								button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+				a(href="" data-toggle="modal" data-target="#eliminar#{imagen._id}" class="right-space text-danger") Eliminar
+				div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="eliminar#{imagen._id}")
+					div(class="modal-dialog" role="document")
+						.modal-content
+							.modal-body
+								.card.text-white.p-5.bg-danger
+									.card-body
+										h2(class="mb-4") Eliminar Estudiante
+										p Si elimina este elemento también se borrarán todos los años que contenga
+							.modal-footer
+								form(action="/app/imagenes/#{imagen._id}?_method=DELETE" class="" method="POST")
+									input(class="btn btn-danger" type="submit" value="Eliminar")
+								button(type="button" class="btn btn-secondary" data-dismiss="modal") Cancelar
+		//-Crear Año en el estudiante
+		br
+		a(href="" data-toggle="modal" data-target="#new_year" class="btn-primary btn mb-2") Crear Año
+		div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="new_year")
+			div(class="modal-dialog" role="document")
+				.modal-content
+					.modal-header
+						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+							span(aria-hidden="true") ×
+					.modal-body
+						.card.text-white.p-5.bg-primary
+							.card-body
+								h1(class="") Crear Año
+								form(action="/app/imagenes/#{imagen._id}" method="POST" enctype="multipart/form-data")
+									.form-group
+										label(for="year") Año
+										select(type="text" name="year" placeholder="Año" id="year" class="form-control")
+									.form-group
+										label(for="course") Curso
+										select(type="text" name="course" placeholder="Curso" id="course" class="form-control")
+											option ...
+											option(value="PREKINDER") PREKINDER
+											option(value="KINDER") KINDER
+											option(value="TRANSICIÓN") TRANSICIÓN
+											option(value="PRIMERO") PRIMERO
+											option(value="SEGUNDO") SEGUNDO
+											option(value="TERCERO") TERCERO
+											option(value="CUARTO") CUARTO
+											option(value="QUINTO") QUINTO
+											option(value="SEXTO") SEXTO
+											option(value="SÉPTIMO") SÉPTIMO
+											option(value="OCTAVO") OCTAVO
+											option(value="NOVENO") NOVENO
+											option(value="DÉCIMO") DÉCIMO
+											option(value="UNDÉCIMO") UNDÉCIMO
+									.form-group
+										label(for="condition") Estado
+										select(type="text" name="condition" placeholder="Estado" id="condition" class="form-control")
+											option ...
+											option(value="SI FUE PROMOVIDO(A)") SI FUE PROMOVIDO(A)
+											option(value="NO FUE PROMOVIDO(A)") NO FUE PROMOVIDO(A)
+									button(type="submit" class="btn btn-secondary") Guardar
+					.modal-footer
+						button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+		.col-md-12
+			ul(class="nav nav-tabs")
+				li(class="nav-item")
+					a(href="" class="active nav-link" data-toggle="tab" data-target="#tabone") Años
+				each year in imagen.years.sort(function (a, b) {if (a.year > b.year) {return 1;}if (a.year < b.year) {return -1;}return 0;})
+					li(class="nav-item")
+						a(href="" class="nav-link" data-toggle="tab" data-target="#tab#{year._id}")= year.year
+			div(class="tab-content bg-light mt-2")
+				div(class="tab-pane fade show active" id="tabone" role="tabpanel")
+					p Haz clic sobre el año que quieres ver
+				each year in imagen.years.sort(function (a, b) {if (a.year > b.year) {return 1;}if (a.year < b.year) {return -1;}return 0;})
+					div(class="tab-pane fade" id="tab#{year._id}" role="tabpanel")
+						.col-md-12.separe
+							.col-md-12
+								form(action="/app/imagenes/#{imagen._id}/#{year._id}/cert" method="POST" enctype="multipart/form-data")
+									.form-group
+										input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
+									button(type="submit" class="btn btn-secondary") Generar certificado
+									script.
+										
+								.table-responsive
+									table(class="table")
+										tbody
+											tr
+												th= year.year
+												th= year.course
+												th
+													//-Modal para Editar el Año
+													a(href="" data-toggle="modal" data-target="#year#{year._id}" class="right-space") Editar
+													div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="year#{year._id}")
+														div(class="modal-dialog" role="document")
+															.modal-content
+																.modal-header
+																	button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+																		span(aria-hidden="true") ×
+																.modal-body
+																	.card.p-5.bg-light.text-secondary.border-secondary.border
+																		.card-body
+																			h1(class="") Editar Año
+																			form(action="/app/imagenes/#{imagen._id}/#{year._id}?_method=PUT" method="POST" enctype="multipart/form-data" id="")
+																				input(type="hidden" value="PUT" name="_method")
+																				.form-group
+																					input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
+																				.form-group
+																					label(for="year") Año
+																					input(type="text" name="year" value="#{year.year}" placeholder="Año" id="year" class="form-control")
+																				.form-group
+																					label(for="course") Curso
+																					select(type="text" name="course" placeholder="Curso" id="course" class="form-control")
+																						option(value="#{year.course}") ... #{year.course} ...
+																						option(value="PREKINDER") PREKINDER
+																						option(value="KINDER") KINDER
+																						option(value="TRANSICIÓN") TRANSICIÓN
+																						option(value="PRIMERO") PRIMERO
+																						option(value="SEGUNDO") SEGUNDO
+																						option(value="TERCERO") TERCERO
+																						option(value="CUARTO") CUARTO
+																						option(value="QUINTO") QUINTO
+																						option(value="SEXTO") SEXTO
+																						option(value="SÉPTIMO") SÉPTIMO
+																						option(value="OCTAVO") OCTAVO
+																						option(value="NOVENO") NOVENO
+																						option(value="DÉCIMO") DÉCIMO
+																						option(value="UNDÉCIMO") UNDÉCIMO
+																				.form-group
+																					label(for="condition") Estado
+																					select(type="text" name="condition" placeholder="Estado" id="condition" class="form-control")
+																						option(value="#{year.condition}") ... #{year.condition} ...
+																						option(value="SI FUE PROMOVIDO(A)") SI FUE PROMOVIDO(A)
+																						option(value="NO FUE PROMOVIDO(A)") NO FUE PROMOVIDO(A)
+																				button(type="submit" class="btn btn-secondary") Guardar
+																.modal-footer
+																	button(type="button" class="btn btn-secondary" data-dismiss="modal") Cerrar
+													a(href="" data-toggle="modal" data-target="#eliminar#{year._id}" class="right-space text-danger") Eliminar
+													div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="eliminar#{year._id}")
+														div(class="modal-dialog" role="document")
+															.modal-content
+																.modal-body
+																	.card.text-white.p-5.bg-danger
+																		.card-body
+																			h2(class="") Eliminar Año
+																			p Si elimina este elemento también se borrarán todas las areas que contenga
+																.modal-footer
+																	form(action="/app/imagenes/#{imagen._id}/#{year._id}?_method=DELETE" class="" method="POST")
+																		input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
+																		button(type="submit" class="btn btn-danger") Eliminar
+																	button(type="button" class="btn btn-secondary" data-dismiss="modal") Cancelar
+								//-Crear Areas en los años
+								a(data-toggle="modal" data-target="#new_area#{year._id}" href="" class="btn-primary btn mb-2") Crear Area
+								div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="new_area#{year._id}")
+									div(class="modal-dialog" role="document")
+										.modal-content
+											.modal-header
+												button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+													span(aria-hidden="true") ×
+											.modal-body
+												.card.text-white.p-5.bg-primary
+													.card-body
+														h1(class="") Crear Area
+														form(action="/app/imagenes/#{imagen._id}/#{year._id}" method="POST" enctype="multipart/form-data")
+															input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
+															.form-group
+																label(for="area") Area
+																input(type="text" name="area" placeholder="Area" id="area" class="form-control" onKeyUp="this.value=this.value.toUpperCase();")
+															.form-group
+																label(for="qa") Calificación por areas
+																input(type="text" name="qa" placeholder="Calificación por areas" id="qa" class="form-control" onKeyUp="this.value=this.value.toUpperCase();")
+															.form-group
+																label(for="iha") I.H por areas
+																input(type="text" name="iha" placeholder="I.H por areas" id="iha" class="form-control" onKeyUp="this.value=this.value.toUpperCase();")
+															button(type="submit" class="btn btn-secondary") Guardar
+											.modal-footer
+												button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+							each area in year.areas.sort(function (a, b) {if (a.area > b.area) {return 1;}if (a.area < b.area) {return -1;}return 0;})
+								.col-md-12.up-line
+									.col-md-12
+										.table-responsive
+											table(class="table")
+												tbody
+													tr
+														td(class="table-success")= area.area
+														td(class="table-success")= area.iha
+														td(class="table-success")= area.qa
+														td(class="table-success")
+															a(href="" data-toggle="modal" data-target="#area#{area._id}" class="right-space") Editar
+															div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="area#{area._id}")
+																div(class="modal-dialog" role="document")
+																	.modal-content
+																		.modal-header
+																			button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+																				span(aria-hidden="true") ×
+																		.modal-body
+																			.card.p-5.bg-light.text-secondary.border-secondary.border
+																				.card-body
+																					h1(class="") Editar Area
+																					form(action="/app/imagenes/#{imagen._id}/#{year._id}/#{area._id}?_method=PUT" method="POST" enctype="multipart/form-data" id="")
+																						input(type="hidden" value="PUT" name="_method")
+																						.form-group
+																							input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
+																						.form-group
+																							input(id="areas" type="text" value="#{area._id}" name="areas" style="display:none")
+																						.form-group
+																							label(for="area") Area
+																							input(type="text" name="area" placeholder="Area" id="area" class="form-control" value="#{area.area}" onKeyUp="this.value=this.value.toUpperCase();")
+																						.form-group
+																							label(for="qa") Calificación por area
+																							input(type="text" name="qa" placeholder="Calificación por area" id="qa" class="form-control" value="#{area.qa}" onKeyUp="this.value=this.value.toUpperCase();")
+																						.form-group
+																							label(for="iha") I.H por area
+																							input(type="text" name="iha" placeholder="I.H por area" id="iha" class="form-control" value="#{area.iha}" onKeyUp="this.value=this.value.toUpperCase();")
+																						button(type="submit" class="btn btn-secondary") Guardar
+																		.modal-footer
+																			button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+															a(href="" data-toggle="modal" data-target="#eliminar#{area._id}" class="right-space text-danger") Eliminar
+															div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="eliminar#{area._id}")
+																div(class="modal-dialog" role="document")
+																	.modal-content
+																		.modal-body
+																			.card.text-white.p-5.bg-danger
+																				.card-body
+																					h2(class="") Eliminar Area
+																					p Si elimina este elemento también se borrarán todas las asignaturas que contenga
+																		.modal-footer
+																			form(action="/app/imagenes/#{imagen._id}/#{year._id}/#{area._id}?_method=DELETE" class="" method="POST")
+																				input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
+																				input(id="areas" type="text" value="#{area._id}" name="areas" style="display:none")
+																				button(type="submit" class="btn btn-danger") Eliminar
+																			button(type="button" class="btn btn-secondary" data-dismiss="modal") Cancelar
+										a(data-toggle="modal" data-target="#new_subject#{area._id}" href="" class="btn-primary btn mb-2") Crear Asignatura
+										div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="new_subject#{area._id}")
+											div(class="modal-dialog" role="document")
+												.modal-content
+													.modal-header
+														button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+															span(aria-hidden="true") ×
+													.modal-body
+														.card.text-white.p-5.bg-primary
+															.card-body
+																h1(class="") Crear Asignatura
+																form(action="/app/imagenes/#{imagen._id}/#{year._id}/#{area._id}" method="POST" enctype="multipart/form-data" class="remove-float center-block" id="")
+																	input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
+																	input(id="area" type="text" value="#{area._id}" name="area" style="display:none")
+																	.form-group
+																		label(for="subject") Asignatura
+																		input(type="text" name="subject" placeholder="Asignatura" id="subject" class="form-control" onKeyUp="this.value=this.value.toUpperCase();")
+																	.form-group
+																		label(for="qualification") Calificación
+																		input(type="text" name="qualification" placeholder="Calificación" id="qualification" class="form-control" onKeyUp="this.value=this.value.toUpperCase();")
+																	.form-group
+																		label(for="ih") Intensidad horaria
+																		input(type="text" name="ih" placeholder="Intensidad horaria" id="ih" class="form-control" onkeypress="return valida(event)")
+																	button(type="submit" class="btn btn-secondary") Guardar
+													.modal-footer
+														button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+										.col-md-12.table-responsive
+											table(class="table table-striped")
+												thead
+													tr
+														th(scope="col") Asignatura
+														th(scope="col") Calificación
+														th(scope="col") I.H.
+														th(scope="col") Más
+												tbody
+													each subject in area.subjects.sort(function (a, b) {if (a.subject > b.subject) {return 1;}if (a.subject < b.subject) {return -1;}return 0;})
+														tr
+															td= subject.subject
+															td= subject.qualification
+															td= subject.ih
+															td 
+																a(href="" data-toggle="modal" data-target="#subject#{subject._id}" class="text-secondary") 
+																	span(class="fa d-inline fa-edit")
+																div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="subject#{subject._id}")
+																	div(class="modal-dialog" role="document")
+																		.modal-content
+																			.modal-header
+																				button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+																					span(aria-hidden="true") ×
+																			.modal-body
+																				.card.p-5.bg-light.text-secondary.border-secondary.border
+																					.card-body
+																						h1(class="") Editar Asignatura
+																						form(action="/app/imagenes/#{imagen._id}/#{year._id}/#{area._id}/#{subject._id}?_method=PUT" method="POST" enctype="multipart/form-data" id="")
+																							input(type="hidden" value="PUT" name="_method")
+																							.form-group
+																								input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
+																							.form-group
+																								input(id="areas" type="text" value="#{area._id}" name="areas" style="display:none")
+																							.form-group
+																								input(id="subjects" type="text" value="#{subject._id}" name="subjects" style="display:none")
+																							.form-group
+																								label(for="subject") Asignatura
+																								input(type="text" name="subject" placeholder="Asignatura" id="subject" value="#{subject.subject}" class="form-control" onKeyUp="this.value=this.value.toUpperCase();")
+																							.form-group
+																								label(for="qualification") Calificación
+																								input(type="text" name="qualification" placeholder="Calificación" value="#{subject.qualification}" id="qualification" class="form-control" onKeyUp="this.value=this.value.toUpperCase();")
+																							.form-group
+																								label(for="ih") Intensidad horaria
+																								input(type="text" name="ih" placeholder="Intensidad horaria" value="#{subject.ih}" id="ih" class="form-control" onkeypress="return valida(event)")
+																							button(type="submit" class="btn btn-secondary") Guardar
+																			.modal-footer
+																				button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+																a(data-toggle="modal" data-target="#eliminar#{subject._id}" class="text-danger")
+																	span(class="fa d-inline fa-trash")
+																div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="eliminar#{subject._id}")
+																	div(class="modal-dialog" role="document")
+																		.modal-content
+																			.modal-body
+																				.card.text-white.p-5.bg-danger
+																					.card-body
+																						h2(class="") Eliminar Asignatura
+																						p Usted está a punto de eliminar una asignatura
+																			.modal-footer
+																				form(action="/app/imagenes/#{imagen._id}/#{year._id}/#{area._id}/#{subject._id}?_method=DELETE" method="POST")
+																					input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
+																					input(id="areas" type="text" value="#{area._id}" name="areas" style="display:none")
+																					input(id="subjects" type="text" value="#{subject._id}" name="subjects" style="display:none")
+																					button(type="submit" class="btn btn-danger") Eliminar
+																				button(type="button" class="btn btn-secondary" data-dismiss="modal") Cancelar
+																a(class="text-primary" data-toggle="modal" data-target="#new_subject#{area._id}")
+																	span(class="fa d-inline fa-plus")
+	br
+	br
+	.row.fixed-bottom.bg-primary.long-line.shadowed
+		p(class="col-md-6 col-xs-6 col-sm-6 col-lg-6")
+			u 
+				b Nombre
+			i= ": "+imagen.name+" "+imagen.lastname 
+		p(class="col-md-6 col-xs-6 col-sm-6 col-lg-6")
+			u
+				b  Id Estudiante
+			i= ": "+imagen.id_student
+	script(src="/public/js/numbers.js")
+	script(src="/public/js/allyears.js")
