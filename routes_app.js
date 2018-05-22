@@ -16,17 +16,20 @@ router.get("/",function(req,res){
                res.render("app/home",{imagenes: imagenes});
             })
 
-      }); 
-
-   /*_Rutas de imagenes(Students)_*/
-router.get("/imagenes/new",function(req,res){
-   res.render("app/imagenes/new");
-});
+      });
+//<<<<<<<<<<<<<<<<<<<Buscador por años>>>>>>>>>>>>>>>>>>>>//
+router.route("/imagenes/years")
+   .post(function(req,res){
+      Imagen.find({"years.year":req.body.year}, function(err,imagenes){
+         res.render("app/home",{imagenes:imagenes});
+      })
+   })
 
 //---ejecutar middlewares---//
 router.all("/imagenes/:id*",image_finder_middleware)
 
-////////////////////////////////////   RUTAS PARA CREAR CERTIFICADOS   ////////////////////////////////////
+
+////////////////////////////////////   RUTA PARA CREAR CERTIFICADOS   ////////////////////////////////////
 
 router.route("/imagenes/:id/:id/cert")
    .post(function(req,res){
@@ -34,24 +37,6 @@ router.route("/imagenes/:id/:id/cert")
          var año = res.locals.imagen.years.id(req.body.years);
          var areas =  año.areas
          res.render("app/imagenes/pdf01",{imagen:res.locals.imagen, year:año});
-      })
-   })
-
-router.route("/imagenes/:id/:id/cert02")
-   .post(function(req,res){
-      Imagen.findById(req.params.id, function(err,imagen){
-         var año = res.locals.imagen.years.id(req.body.years);
-         var areas =  año.areas
-         res.render("app/imagenes/pdf02",{imagen:res.locals.imagen, year:año});
-      })
-   })
-
-router.route("/imagenes/:id/:id/cert03")
-   .post(function(req,res){
-      Imagen.findById(req.params.id, function(err,imagen){
-         var año = res.locals.imagen.years.id(req.body.years);
-         var areas =  año.areas
-         res.render("app/imagenes/pdf03",{imagen:res.locals.imagen, year:año});
       })
    })
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>--CRUD's DATABASES--<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
@@ -67,7 +52,9 @@ router.route("/imagenes/:id/:id/:id/:id")
          var s = res.locals.imagen.years.id(req.body.years).areas.id(req.body.areas).subjects.id(req.body.subjects);
             s.subject = req.body.subject,
             s.qualification = req.body.qualification,
-            s.ih = req.body.ih;
+            s.ih = req.body.ih,
+            res.locals.imagen.action = " editó la asignatura "+req.body.subject,
+            res.locals.imagen.creator = res.locals.user._id;
          res.locals.imagen.save(function(err){
             if(!err){
                res.redirect("/app/imagenes/"+res.locals.imagen._id);
@@ -82,8 +69,13 @@ router.route("/imagenes/:id/:id/:id/:id")
    .delete(function(req,res){
       Imagen.findById(req.params.id, function(err,imagen){
          var sub = res.locals.imagen.years.id(req.body.years).areas.id(req.body.areas).subjects.id(req.body.subjects)
-         if (sub == null){res.redirect("/app/imagenes/"+res.locals.imagen._id)}
-         else{sub.remove();}
+         if (sub == null){
+            res.redirect("/app/imagenes/"+res.locals.imagen._id)
+         }else{
+            res.locals.imagen.action = " eliminó una asignatura",
+            res.locals.imagen.creator = res.locals.user._id;
+            sub.remove();
+         }
          res.locals.imagen.save(function(err){
             if(!err){
                res.render("app/imagenes/show",{imagen:res.locals.imagen})
@@ -105,10 +97,12 @@ router.route("/imagenes/:id/:id/:id")
 //----------Create new Subject----------//
    .post(function(req,res){
       Imagen.findById(req.params.id, function(err,imagen){
+         res.locals.imagen.action = " creó la asignatura "+req.body.subject,
+         res.locals.imagen.creator = res.locals.user._id;
          res.locals.imagen.years.id(req.body.years).areas.id(req.body.area).subjects.push({
                subject: req.body.subject,
                qualification: req.body.qualification,
-               ih: req.body.ih
+               ih: req.body.ih,
          });
          res.locals.imagen.save(function(err){
             if(!err){
@@ -125,9 +119,11 @@ router.route("/imagenes/:id/:id/:id")
    .put(function(req,res){
       Imagen.findById(req.params.id, function(err,imagen){
          var a = res.locals.imagen.years.id(req.body.years).areas.id(req.body.areas);
-            a.area = req.body.area
-            a.iha = req.body.iha
-            a.qa = req.body.qa;
+            a.area = req.body.area,
+            a.iha = req.body.iha,
+            a.qa = req.body.qa,
+            res.locals.imagen.action = " editó el area "+req.body.area,
+            res.locals.imagen.creator = res.locals.user._id;
          res.locals.imagen.save(function(err){
             if(!err){
                res.redirect("/app/imagenes/"+res.locals.imagen._id);
@@ -142,8 +138,13 @@ router.route("/imagenes/:id/:id/:id")
    .delete(function(req,res){
       Imagen.findById(req.params.id, function(err,imagen){
          var ar = res.locals.imagen.years.id(req.body.years).areas.id(req.body.areas)
-         if (ar == null){res.redirect("/app/imagenes/"+res.locals.imagen._id)}
-         else{ar.remove();}
+         if (ar == null){
+            res.redirect("/app/imagenes/"+res.locals.imagen._id)
+         }else{
+            res.locals.imagen.action = " eliminó un area ",
+            res.locals.imagen.creator = res.locals.user._id;
+            ar.remove();
+         }
          res.locals.imagen.save(function(err){
             if(!err){
                res.redirect("/app/imagenes/"+res.locals.imagen._id)
@@ -165,6 +166,8 @@ router.route("/imagenes/:id/:id")
 //----------Create new Area----------//
    .post(function(req,res){
       Imagen.findById(req.params.id, function(err,imagen){
+         res.locals.imagen.action = " creó el area "+req.body.area,
+         res.locals.imagen.creator = res.locals.user._id;
          res.locals.imagen.years.id(req.body.years).areas.push({
                area: req.body.area,
                iha: req.body.iha,
@@ -187,7 +190,9 @@ router.route("/imagenes/:id/:id")
          var y = res.locals.imagen.years.id(req.body.years);
             y.year = req.body.year, //Objeto a insertar
             y.course = req.body.course,
-            y.condition = req.body.condition;
+            y.condition = req.body.condition,
+            res.locals.imagen.action = " editó el año "+req.body.year,
+            res.locals.imagen.creator = res.locals.user._id;
          res.locals.imagen.save(function(err){
             if(!err){
                res.redirect("/app/imagenes/"+res.locals.imagen._id);
@@ -202,8 +207,13 @@ router.route("/imagenes/:id/:id")
    .delete(function(req,res){
       Imagen.findById(req.params.id, function(err,imagen){
          var ye = res.locals.imagen.years.id(req.body.years)
-         if (ye == null){res.redirect("/app/imagenes/"+res.locals.imagen._id)}
-         else{ye.remove();}
+         if (ye == null){
+            res.redirect("/app/imagenes/"+res.locals.imagen._id)
+         }else{
+            res.locals.imagen.action = " eliminó un año",
+            res.locals.imagen.creator = res.locals.user._id;
+            ye.remove();
+         }
          res.locals.imagen.save(function(err){
             if(!err){
                res.redirect("/app/imagenes/"+res.locals.imagen._id);
@@ -226,6 +236,8 @@ router.route("/imagenes/:id")
 //-------------Create new year-------------//
    .post(function(req,res){
       Imagen.findById(req.params.id, function(err,imagen){
+         res.locals.imagen.action = " creó el año "+req.body.year,
+         res.locals.imagen.creator = res.locals.user._id;
          res.locals.imagen.years.push({
             year: req.body.year, 
             course: req.body.course,
@@ -246,7 +258,9 @@ router.route("/imagenes/:id")
    .put(function(req,res){
       res.locals.imagen.id_student = req.body.id_student,
       res.locals.imagen.name = req.body.name,
-      res.locals.imagen.lastname = req.body.lastname;
+      res.locals.imagen.lastname = req.body.lastname,
+      res.locals.imagen.creator = res.locals.user._id,
+      res.locals.imagen.action = " modificó al estudiante";
       res.locals.imagen.save(function(err){
          if(!err){
             res.redirect("/app/imagenes/"+res.locals.imagen._id);
@@ -276,7 +290,7 @@ router.route("/imagenes")
    .get(function(req,res){
       Imagen.find({creator: res.locals.user._id},function(err,imagenes){
          if(err){ res.redirect("/app");return;}
-         res.render("app/imagenes/index",{imagenes: imagenes})
+         res.render("app/home",{imagenes: imagenes})
       });
    })
 //----------Create new Student----------//
@@ -286,6 +300,7 @@ router.route("/imagenes")
          name: req.body.name,
          lastname: req.body.lastname,
          creator: res.locals.user._id,
+         action: "Creado",
          years: []
       }
 
