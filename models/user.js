@@ -13,13 +13,9 @@ var password_validation = {
 	message: "las contraseñas no son iguales"
 }
 var user_schema = new Schema({
-	name: String,
 	username: {type:String,required:true,maxlength:[50,"Username muy largo"]},
 	password: {type:String,minlength:[8,"El password es muy corto"],validate: password_validation},
-	age: {type: Number,min:[5, "la edad no puede ser menor que 5"], max: [20, "la edad no puede ser mayor que 20"]},
 	email: {type: String, required:true, match:email_match},
-	date_of_birth: Date,
-	sex: {type:String,enum:{values: posibles_valores, message:"Opción no válida"}}
 });
 
 user_schema.virtual("password_confirmation").get(function(){

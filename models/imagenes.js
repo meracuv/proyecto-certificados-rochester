@@ -7,6 +7,7 @@ var img_Schema = new Schema({
 	name: {type:String, require:true},
 	lastname: {type:String, require:true},
 	creator: {type: Schema.Types.ObjectId, ref: "User" },
+	action: {type:String, require:true},
 	years: [ {
 		year: String,
 		course: String,

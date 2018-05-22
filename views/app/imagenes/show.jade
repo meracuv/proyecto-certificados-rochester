@@ -9,6 +9,7 @@ block contenido
 						i= imagen.name+" "+imagen.lastname
 				h4
 					i= imagen.id_student
+				p= imagen.creator.username+" "+imagen.action
 			.col-md-12
 				a(href="" data-toggle="modal" data-target="#editar#{imagen._id}" class="right-space") Editar
 				div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="editar#{imagen._id}")
@@ -110,8 +111,6 @@ block contenido
 									.form-group
 										input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
 									button(type="submit" class="btn btn-secondary") Generar certificado
-									script.
-										
 								.table-responsive
 									table(class="table")
 										tbody

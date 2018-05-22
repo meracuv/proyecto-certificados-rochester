@@ -42,7 +42,7 @@ html(lang="es" xml:lang="es")
 						font(style="font-weight: bold;") CERTIFICAN:
 				.col-md-12
 					p(align='LEFT' style='line-height: 80%')
-						font(size='2', style='font-size: 9.9pt') Que #{imagen.name} #{imagen.lastname} estuvo matriculado(a) en el Colegio Rochester, Calendario B, en el Grado #{year.course}  para el año escolar #{year.year} y obtuvo los siguientes resultados finales:
+						font(size='2', style='font-size: 9.9pt') Que #{imagen.lastname} #{imagen.name} estuvo matriculado(a) en el Colegio Rochester, Calendario B, en el Grado #{year.course}  para el año escolar #{year.year} y obtuvo los siguientes resultados finales:
 				.col-md-6
 					font(style="font-weight: bold;") AREAS/ASIGNATURAS
 				div(class="col-md-3" style="text-align: center;")
@@ -83,16 +83,16 @@ html(lang="es" xml:lang="es")
 				br
 				font(id="encabezado" size='1' style='font-size: 8pt' class="col-md-12") De acuerdo al proyecto educativo institucional del Colegio Rochester, las calificaciones finales del presente certificado indican lo siguiente:
 				font(size='1' style="font-weight: bold; font-size: 8pt" class="col-md-1")
-					b(id="bajo") Bajo
+					b(id="bajo") Bajo:
 				font(id="bajo_val" size='1' style='font-size: 8pt' class="col-md-11") El estudiante tiene aprendizajes en Progreso, no ha logrado un nivel Competente o su promedio es inferior a 82.5%
 				font(size='1' style="font-weight: bold; font-size: 8pt" class="col-md-1")
-					b(id="basico") Básico
+					b(id="basico") Básico:
 				font(id="basico_val" size='1' style='font-size: 8pt' class="col-md-11") El estudiante demostró un nivel totalmente Competente, no quedaron aprendizajes en Progreso y su promedio final es mayor o igual a 82.5% y menor a 98%
 				font(size='1' style="font-weight: bold; font-size: 8pt" class="col-md-1")
-					b(id="alto") Alto
+					b(id="alto") Alto:
 				font(id="alto_val" size='1' style='font-size: 8pt' class="col-md-11") El estudiante demostró un nivel Avanzado por encima del nivel totalmente Competente, no quedaron aprendizajes en Progreso y su promedio final es mayor o igual a 98% y menor o igual a 130%
 				font(size='1' style="font-weight: bold; font-size: 8pt" class="col-md-1")
-					b(id="superior") Superior
+					b(id="superior") Superior:
 				font(id="superior_val" size='1' style='font-size: 8pt' class="col-md-11") El estudiante demostró un nivel Magistral, por encima del Avanzado y totalmente Competente, no quedaron aprendizajes en Progreso y su promedio final es superior a 130%
 				script.
 					var y = "#{year.year}";
