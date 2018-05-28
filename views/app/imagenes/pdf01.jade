@@ -3,6 +3,7 @@ html(lang="es" xml:lang="es")
 	head
 		title Certificados Rochester School
 		meta(charset="utf-8")
+		
 		link(link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css")
 		link(rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css")
 		link(href="/public/css/app.css" rel="stylesheet")
@@ -28,7 +29,7 @@ html(lang="es" xml:lang="es")
 										margin:       0,
 										filename:     '#{imagen.name} #{imagen.lastname} #{year.year}.pdf',
 										image:        { type: 'jpeg', quality: 20 },
-										html2canvas:  { dpi: 470, letterRendering: true },
+										html2canvas:  { dpi: 475, letterRendering: true },
 										jsPDF:        { unit: 'mm', format: 'letter', orientation: 'portrait' }
 									});}
 		#imprimir.container.col-md-10.offset-md-1

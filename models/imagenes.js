@@ -1,9 +1,10 @@
 var mongoose = require("mongoose"); //LLamado de mongoose
+var uniqueValidator = require("mongoose-unique-validator")
 var Schema = mongoose.Schema; //Funcionde mongos para crear Schemas
 
 //------Base de datos de los "Estudiantes"------//
 var img_Schema = new Schema({
-	id_student: {type:String, require:true},
+	id_student: {type:String, require:true, unique:true},
 	name: {type:String, require:true},
 	lastname: {type:String, require:true},
 	creator: {type: Schema.Types.ObjectId, ref: "User" },

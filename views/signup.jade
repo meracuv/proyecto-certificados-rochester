@@ -3,13 +3,14 @@ html(lang='es')
 	head
 		title Certificados Rochester School
 		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
 		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet")
 		link(href="/public/css/app.css" rel="stylesheet")
 		script(src="/socket.io/socket.io.js")
 		script(src="/public/js/handlebars.js")
 	body
 		div(class="col-md-8 remove-float center-block big-top-space")
-			h1 Registrate
+			h1 Regístrate
 			form(action="/users" method="POST")
 				div(class="container-fluid")
 					div(class="form-group")
@@ -20,7 +21,7 @@ html(lang='es')
 						input(type="password" name="password" placeholder="Contraseña" id="password" class="form-control")
 					div(class="form-group")
 						label(for="password") Confirma tu contraseña
-						input(type="password" name="password_confirmation", placeholder="Confirmar Contraseña" id="password" class="form-control")
+						input(type="password" name="password_confirmation" placeholder="Confirmar Contraseña" id="password" class="form-control")
 					div(class="form-group")
 						label(for="password") Username
 						input(type="text" name="username" placeholder="Nombre de usuario" id="username" class="form-control")

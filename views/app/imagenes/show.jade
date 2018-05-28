@@ -9,7 +9,7 @@ block contenido
 						i= imagen.name+" "+imagen.lastname
 				h4
 					i= imagen.id_student
-				p= imagen.creator.username+" "+imagen.action
+				p= imagen.action
 			.col-md-12
 				a(href="" data-toggle="modal" data-target="#editar#{imagen._id}" class="right-space") Editar
 				div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="editar#{imagen._id}")
@@ -19,7 +19,7 @@ block contenido
 								button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 									span(aria-hidden="true") ×
 							.modal-body
-								.card.p-5.bg-light.text-secondary.border-secondary.border
+								.card.bg-light.text-secondary.border-secondary.border
 									.card-body
 										h1(class="mb-4") Editar Estudiante
 										form(action="/app/imagenes/#{imagen._id}?_method=PUT" method="POST" enctype="multipart/form-data")
@@ -41,7 +41,7 @@ block contenido
 					div(class="modal-dialog" role="document")
 						.modal-content
 							.modal-body
-								.card.text-white.p-5.bg-danger
+								.card.text-white.bg-danger
 									.card-body
 										h2(class="mb-4") Eliminar Estudiante
 										p Si elimina este elemento también se borrarán todos los años que contenga
@@ -59,7 +59,7 @@ block contenido
 						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 							span(aria-hidden="true") ×
 					.modal-body
-						.card.text-white.p-5.bg-primary
+						.card.text-white.bg-primary
 							.card-body
 								h1(class="") Crear Año
 								form(action="/app/imagenes/#{imagen._id}" method="POST" enctype="multipart/form-data")
@@ -107,7 +107,7 @@ block contenido
 					div(class="tab-pane fade" id="tab#{year._id}" role="tabpanel")
 						.col-md-12.separe
 							.col-md-12
-								form(action="/app/imagenes/#{imagen._id}/#{year._id}/cert" method="POST" enctype="multipart/form-data")
+								form(action="/app/imagenes/#{imagen._id}/#{year._id}/pdf" method="POST" enctype="multipart/form-data")
 									.form-group
 										input(id="years" type="text" value="#{year._id}" name="years" style="display:none")
 									button(type="submit" class="btn btn-secondary") Generar certificado
@@ -127,7 +127,7 @@ block contenido
 																	button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 																		span(aria-hidden="true") ×
 																.modal-body
-																	.card.p-5.bg-light.text-secondary.border-secondary.border
+																	.card.bg-light.text-secondary.border-secondary.border
 																		.card-body
 																			h1(class="") Editar Año
 																			form(action="/app/imagenes/#{imagen._id}/#{year._id}?_method=PUT" method="POST" enctype="multipart/form-data" id="")
@@ -169,7 +169,7 @@ block contenido
 														div(class="modal-dialog" role="document")
 															.modal-content
 																.modal-body
-																	.card.text-white.p-5.bg-danger
+																	.card.text-white.bg-danger
 																		.card-body
 																			h2(class="") Eliminar Año
 																			p Si elimina este elemento también se borrarán todas las areas que contenga
@@ -187,7 +187,7 @@ block contenido
 												button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 													span(aria-hidden="true") ×
 											.modal-body
-												.card.text-white.p-5.bg-primary
+												.card.text-white.bg-primary
 													.card-body
 														h1(class="") Crear Area
 														form(action="/app/imagenes/#{imagen._id}/#{year._id}" method="POST" enctype="multipart/form-data")
@@ -223,7 +223,7 @@ block contenido
 																			button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 																				span(aria-hidden="true") ×
 																		.modal-body
-																			.card.p-5.bg-light.text-secondary.border-secondary.border
+																			.card.bg-light.text-secondary.border-secondary.border
 																				.card-body
 																					h1(class="") Editar Area
 																					form(action="/app/imagenes/#{imagen._id}/#{year._id}/#{area._id}?_method=PUT" method="POST" enctype="multipart/form-data" id="")
@@ -249,7 +249,7 @@ block contenido
 																div(class="modal-dialog" role="document")
 																	.modal-content
 																		.modal-body
-																			.card.text-white.p-5.bg-danger
+																			.card.text-white.bg-danger
 																				.card-body
 																					h2(class="") Eliminar Area
 																					p Si elimina este elemento también se borrarán todas las asignaturas que contenga
@@ -267,7 +267,7 @@ block contenido
 														button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 															span(aria-hidden="true") ×
 													.modal-body
-														.card.text-white.p-5.bg-primary
+														.card.text-white.bg-primary
 															.card-body
 																h1(class="") Crear Asignatura
 																form(action="/app/imagenes/#{imagen._id}/#{year._id}/#{area._id}" method="POST" enctype="multipart/form-data" class="remove-float center-block" id="")
@@ -309,7 +309,7 @@ block contenido
 																				button(type="button" class="close" data-dismiss="modal" aria-label="Close")
 																					span(aria-hidden="true") ×
 																			.modal-body
-																				.card.p-5.bg-light.text-secondary.border-secondary.border
+																				.card.bg-light.text-secondary.border-secondary.border
 																					.card-body
 																						h1(class="") Editar Asignatura
 																						form(action="/app/imagenes/#{imagen._id}/#{year._id}/#{area._id}/#{subject._id}?_method=PUT" method="POST" enctype="multipart/form-data" id="")
@@ -338,7 +338,7 @@ block contenido
 																	div(class="modal-dialog" role="document")
 																		.modal-content
 																			.modal-body
-																				.card.text-white.p-5.bg-danger
+																				.card.text-white.bg-danger
 																					.card-body
 																						h2(class="") Eliminar Asignatura
 																						p Usted está a punto de eliminar una asignatura

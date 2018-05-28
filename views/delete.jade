@@ -10,8 +10,8 @@ html(lang='es')
 		script(src="/public/js/handlebars.js")
 	body
 		div(class="col-md-6 remove-float center-block big-top-space")
-			h1 Iniciar sesión (Login)
-			form(action="/sessions" method="POST")
+			h1 Eliminar Usuario
+			form(action="/delete" method="POST")
 				div(class="container-fluid")
 					div(class="form-group")
 						label(for="email") Email
@@ -21,18 +21,4 @@ html(lang='es')
 						input(type="password" name="password" placeholder="Contraseña" id="password" class="form-control")
 					div(class="row top-space")
 						div(class="col-xs-12 col-sm-6")
-							input(type="submit" value="Entrar" class="btn btn-primary")
-						div(class="col-xs-12 col-sm-6 text-right")
-							a(href="/signup") No tengo cuenta
-	script.
-		var validate = ("login?message=INVALID%20USER");
-		var validate2 = ("login?error=INVALID%20EMAIL%20OR%20PASSWORD");
-		var validate3 = ("login?USUARIO%20ELIMINADO");
-		var url = location.href.split("/")[location.href.split("/").length - 1];
-		if (validate == url){
-			alert("Usuario o contraseña invalidos");
-		}else if(validate2 == url){
-			alert("Por favor ingrese sus datos para iniciar sesión");
-		}else if(validate3 == url){
-			alert("Usuario eliminado con exito");
-		}
+							input(type="submit" value="Eliminar" class="btn btn-primary")

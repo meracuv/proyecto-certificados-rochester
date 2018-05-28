@@ -26,6 +26,7 @@
     "method-override": "^2.3.10",
     "mongod": "^2.0.0",
     "mongoose": "^4.13.9",
+    "mongoose-unique-validator": "^2.0.1",
     "pug": "^2.0.0-rc.4",
     "redis": "^2.8.0",
     "request": "^2.85.0",

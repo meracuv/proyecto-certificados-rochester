@@ -2,15 +2,8 @@ extends ../layout.jade
 block contenido
 	div
 		.img-container
-			form(class="m-0 bg-primary" action="")
-				input(id="search" class="form-control mr-2" type="text" placeholder="Buscar")
-			br
-			form(class="m-0" action="/app/imagenes/years" method="POST" enctype="multipart/form-data")
-				.row
-					.col-md-10
-						select(type="text" name="year" placeholder="Año" id="year" class="form-control ")
-					.col-md-2
-						button(type="submit" class="btn btn-secondary ") Buscar
+			form.m-0.bg-primary(action="")
+				input.form-control.mr-2(id="search"  type="text" placeholder="Filtrar")
 			#container
 				for imagen in imagenes
 					a(href="/app/imagenes/#{imagen.id}")

@@ -37,13 +37,11 @@ app.use(formidable.parse({keepExtensions: true }));
 app.set("view engine", "jade");
 
 app.get("/",function(req,res){
-	console.log(req.session.user_id);
 	res.render("index");
 });
 
 app.get("/signup",function(req,res){
 	User.find(function(err,doc){
-		console.log(doc);
 		res.render("signup");
 	});
 });
@@ -51,6 +49,38 @@ app.get("/signup",function(req,res){
 app.get("/login",function(req,res){
 		res.render("login");
 });
+
+app.get("/eliminar_usuario", function(req,res){
+	res.render("delete")
+})
+
+app.post("/closesession",function(req,res){
+	req.session.destroy(function(err){
+		if(!err){
+			res.redirect("/login")
+		}else{
+			console.log(err);
+			res.redirect("/eliminar_usuario");
+		}
+    })
+})
+
+app.post("/delete",function(req,res){
+	User.findOneAndRemove({$and:[{email: req.body.email},{password:req.body.password}]},function(err){
+        if(!err){
+        	req.session.destroy(function(err){
+        		if(!err){
+        			res.redirect("/login?USUARIO ELIMINADO");
+        		}else{
+        			console.log(err);
+        			res.redirect("/eliminar_usuario");
+        		}
+        	})
+        }else{
+        	res.redirect("/eliminar_usuario");
+        }
+    })
+})
 
 app.post("/users",function(req,res){
 
@@ -89,7 +119,7 @@ app.post("/sessions",function(req,res) {
     req.session.user_id = user._id
     res.redirect("/app")
   })
-})
+});
 
 app.use("/app",session_middleware);
 app.use("/app",router_app);
