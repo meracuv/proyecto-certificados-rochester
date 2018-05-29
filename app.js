@@ -16,7 +16,7 @@ var server = http.Server(app);
 
 var sessionMiddleware = session({
 	store: new RedisStore({}),
-	secret:"meracunofalse"
+	secret:"rochester"
 });
 
 realtime(server,sessionMiddleware);

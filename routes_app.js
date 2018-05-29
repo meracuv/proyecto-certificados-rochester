@@ -23,7 +23,6 @@ router.route("/imagenes/years")
          res.render("app/home",{imagenes:imagenes});
       })
    })
-
 //<<<<<<<<<<<<<<<<<<<Buscador por nombre(s), apellido(s) o id>>>>>>>>>>>>>>>>>>>>//
 router.route("/imagenes/name")
    .post(function(req,res){
@@ -32,6 +31,7 @@ router.route("/imagenes/name")
          res.render("app/home",{imagenes:imagenes});
       })
    })
+
 //---ejecutar middlewares---//
 router.all("/imagenes/:id*",image_finder_middleware)
 
@@ -60,7 +60,7 @@ router.route("/imagenes/:id/:id/:id/:id")
             s.subject = req.body.subject,
             s.qualification = req.body.qualification,
             s.ih = req.body.ih,
-            res.locals.imagen.action = " editó la asignatura "+req.body.subject,
+            res.locals.imagen.action = res.locals.user.username+" editó la asignatura "+req.body.subject,
             res.locals.imagen.creator = res.locals.user._id;
          res.locals.imagen.save(function(err){
             if(!err){
