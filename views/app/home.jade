@@ -3,7 +3,7 @@ block contenido
 	div
 		.img-container
 			form.m-0.bg-primary(action="")
-				input.form-control.mr-2(id="search"  type="text" placeholder="Filtrar")
+				input.form-control.mr-2(id="search" type="text" placeholder="Filtrar")
 			#container
 				for imagen in imagenes
 					a(href="/app/imagenes/#{imagen.id}")

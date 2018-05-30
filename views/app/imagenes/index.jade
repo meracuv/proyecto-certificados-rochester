@@ -1,6 +1,6 @@
 extends ../../layout.jade
 block contenido
-	div(class="container")
+	.container
 		h1 Mis Creaciones
 		for imagen in imagenes
 			.white.border.tr.large-padding
@@ -8,42 +8,42 @@ block contenido
 					.col-md-10
 						h3=imagen.name+" "+imagen.lastname
 					.col-md-2
-						a(href="" data-toggle="modal" data-target="#editar#{imagen._id}" class="right-space") Editar
-						div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="editar#{imagen._id}")
-							div(class="modal-dialog" role="document")
+						a.right-space(href="" data-toggle="modal" data-target="#editar#{imagen._id}") Editar
+						div.modal(aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="editar#{imagen._id}")
+							.modal-dialog(role="document")
 								.modal-content
 									.modal-header
-										button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+										button.close(type="button" data-dismiss="modal" aria-label="Close")
 											span(aria-hidden="true") ×
 									.modal-body
 										.card.p-5.bg-light.text-secondary.border-secondary.border
 											.card-body
-												h1(class="mb-4") Editar Estudiante
+												h1.mb-4 Editar Estudiante
 												form(action="/app/imagenes/#{imagen._id}?_method=PUT" method="POST" enctype="multipart/form-data")
 													input(type="hidden" value="PUT" name="_method")
 													.form-group
 														label(for="name") Nombre
-														input(type="text" name="name" placeholder="Nombre" id="name" class="form-control" onKeyUp="this.value=this.value.toUpperCase();" value="#{imagen.name}")
+														input.form-control(type="text" name="name" placeholder="Nombre" id="name" onKeyUp="this.value=this.value.toUpperCase();" value="#{imagen.name}")
 													.form-group
 														label(for="lastname") Apellido
-														input(type="text" name="lastname" placeholder="Apellido" id="lastname" class="form-control" onKeyUp="this.value=this.value.toUpperCase();" value="#{imagen.lastname}")
+														input.form-control(type="text" name="lastname" placeholder="Apellido" id="lastname" onKeyUp="this.value=this.value.toUpperCase();" value="#{imagen.lastname}")
 													.form-group
 														label(for="id_student") Id
-														input(type="number" name="id_student" placeholder="Id" id="id_student" class="form-control" value="#{imagen.id_student}" onkeypress="return valida(event)")
-													button(type="submit" class="btn btn-secondary") Guardar
+														input.form-control(type="number" name="id_student" placeholder="Id" id="id_student" value="#{imagen.id_student}" onkeypress="return valida(event)")
+													button.btn.btn-secondary(type="submit") Guardar
 									.modal-footer
-										button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
-						a(href="" data-toggle="modal" data-target="#eliminar#{imagen._id}" class="link delete right-space text-danger") Eliminar
-						div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="eliminar#{imagen._id}")
-							div(class="modal-dialog" role="document")
+										button.btn.btn-secondary(type="button" data-dismiss="modal") Close
+						a.link.delete.right-space.text-danger(href="" data-toggle="modal" data-target="#eliminar#{imagen._id}") Eliminar
+						.modal(aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="eliminar#{imagen._id}")
+							.modal-dialog(role="document")
 								.modal-content
 									.modal-body
 										.card.text-white.p-5.bg-danger
 											.card-body
-												h2(class="mb-4") Eliminar Estudiante
+												h2.mb-4 Eliminar Estudiante
 												p Si elimina este elemento también se borrarán todos los años que contenga
 									.modal-footer
-										form(action="/app/imagenes/#{imagen._id}?_method=DELETE" class="" method="POST")
-											input(class="btn btn-danger" type="submit" value="Eliminar")
-										button(type="button" class="btn btn-secondary" data-dismiss="modal") Cancelar
+										form(action="/app/imagenes/#{imagen._id}?_method=DELETE" method="POST")
+											input.btn.btn-danger( type="submit" value="Eliminar")
+										button.btn.btn-secondary(type="button" data-dismiss="modal") Cancelar
 	script(src="/public/js/numbers.js")

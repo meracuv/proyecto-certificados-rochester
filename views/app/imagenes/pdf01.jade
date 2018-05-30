@@ -14,14 +14,14 @@ html(lang="es" xml:lang="es")
 		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous")
 		script(src="/public/js/html2pdf.bundle.min.js")
 	body(style="font-family: arial;")
-		nav(class="navbar fixed-top navbar-expand-md bg-primary navbar-dark")
+		nav.navbar.fixed-top.navbar-expand-md.bg-primary.navbar-dark
 			.container
-				button(class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar3SupportedContent" aria-controls="navbar3SupportedContent" aria-expanded="false" aria-label="Toggle navigation")
-					span(class="navbar-toggler-icon")
+				button.navbar-toggler.navbar-toggler-right(type="button" data-toggle="collapse" data-target="#navbar3SupportedContent" aria-controls="navbar3SupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+					span.navbar-toggler-icon
 				.collapse.navbar-collapse.text-center.justify-content-center#navbar3SupportedContent
-					ul(class="navbar-nav")
-						li(class="nav-item")
-							a(href="javascript:pruebaDivAPdf()" class="nav-link") Pasar a PDF
+					ul.navbar-nav
+						li.nav-item
+							a.nav-link(href="javascript:pruebaDivAPdf()") Pasar a PDF
 								script.
 									function pruebaDivAPdf(){
 									var element = document.getElementById('imprimir');
@@ -46,55 +46,55 @@ html(lang="es" xml:lang="es")
 						font(size='2', style='font-size: 9.9pt') Que #{imagen.lastname} #{imagen.name} estuvo matriculado(a) en el Colegio Rochester, Calendario B, en el Grado #{year.course}  para el año escolar #{year.year} y obtuvo los siguientes resultados finales:
 				.col-md-6
 					font(style="font-weight: bold;") AREAS/ASIGNATURAS
-				div(class="col-md-3" style="text-align: center;")
+				.col-md-3(style="text-align: center;")
 					font(style="font-weight: bold;") I.H
-				div(class="col-md-3" style="text-align: center;")
+				.col-md-3(style="text-align: center;")
 					font(style="font-weight: bold;") CALIFICACIÓN
 			.row
 				each area in year.areas.sort(function (a, b) {if (a.area > b.area) {return 1;}if (a.area < b.area) {return -1;}return 0;})
 					.col-md-6
 						.row
-							font(size='1' class="col-md-12" style="font-size: 9pt; font-weight: bold; text-transform: uppercase;")
+							font.col-md-12(size='1' style="font-size: 9pt; font-weight: bold; text-transform: uppercase;")
 								b= area.area
 					.col-md-3
 						.row
-							font(size='1' class="col-md-12" style="font-size: 9pt; text-align: center; font-weight: bold; text-transform: uppercase;")
+							font.col-md-12(size='1' style="font-size: 9pt; text-align: center; font-weight: bold; text-transform: uppercase;")
 								b= area.iha
 					.col-md-3
 						.row
-							font(size='1' class="col-md-12" style="font-size: 9pt; text-align: center; font-weight: bold; text-transform: uppercase;")
+							font.col-md-12(size='1' style="font-size: 9pt; text-align: center; font-weight: bold; text-transform: uppercase;")
 								b= area.qa
 					each subject in area.subjects.sort(function (a, b) {if (a.subject > b.subject) {return 1;}if (a.subject < b.subject) {return -1;}return 0;})
 						.col-md-6
 							.row
-								font(size='1' class="col-md-12" style="font-size: 7pt;") #{subject.subject}
+								font.col-md-12(size='1' style="font-size: 7pt;") #{subject.subject}
 						.col-md-3
 							.row
-								font(size='1' class="col-md-12" style="font-size: 7pt; text-align: center; text-transform: uppercase;") #{subject.ih}
+								font.col-md-12(size='1' style="font-size: 7pt; text-align: center; text-transform: uppercase;") #{subject.ih}
 						.col-md-3
 							.row
-								font(size='1' class="col-md-12" style="font-size: 7pt; text-align: center; text-transform: uppercase;") #{subject.qualification}
+								font.col-md-12(size='1' style="font-size: 7pt; text-align: center; text-transform: uppercase;") #{subject.qualification}
 				br
-				font(style="font-weight: bold; font-size: 12pt;" class="col-md-12")
+				font.col-md-12(style="font-weight: bold; font-size: 12pt;" )
 					b= year.condition
 			.row
 				br
-				font(style="font-weight: bold; font-size: 12pt;" class="col-md-12")
+				font.col-md-12(style="font-weight: bold; font-size: 12pt;")
 					b(id="concepto") El sistema de evaluación incluye 4 conceptos: Superior, Alto, Básico y Bajo
 				br
-				font(id="encabezado" size='1' style='font-size: 8pt' class="col-md-12") De acuerdo al proyecto educativo institucional del Colegio Rochester, las calificaciones finales del presente certificado indican lo siguiente:
-				font(size='1' style="font-weight: bold; font-size: 8pt" class="col-md-1")
+				font.col-md-12(id="encabezado" size='1' style='font-size: 8pt') De acuerdo al proyecto educativo institucional del Colegio Rochester, las calificaciones finales del presente certificado indican lo siguiente:
+				font.col-md-1(size='1' style="font-weight: bold; font-size: 8pt")
 					b(id="bajo") Bajo:
-				font(id="bajo_val" size='1' style='font-size: 8pt' class="col-md-11") El estudiante tiene aprendizajes en Progreso, no ha logrado un nivel Competente o su promedio es inferior a 82.5%
-				font(size='1' style="font-weight: bold; font-size: 8pt" class="col-md-1")
+				font.col-md-11(id="bajo_val" size='1' style='font-size: 8pt') El estudiante tiene aprendizajes en Progreso, no ha logrado un nivel Competente o su promedio es inferior a 82.5%
+				font.col-md-1(size='1' style="font-weight: bold; font-size: 8pt")
 					b(id="basico") Básico:
-				font(id="basico_val" size='1' style='font-size: 8pt' class="col-md-11") El estudiante demostró un nivel totalmente Competente, no quedaron aprendizajes en Progreso y su promedio final es mayor o igual a 82.5% y menor a 98%
-				font(size='1' style="font-weight: bold; font-size: 8pt" class="col-md-1")
+				font.col-md-11(id="basico_val" size='1' style='font-size: 8pt') El estudiante demostró un nivel totalmente Competente, no quedaron aprendizajes en Progreso y su promedio final es mayor o igual a 82.5% y menor a 98%
+				font.col-md-1(size='1' style="font-weight: bold; font-size: 8pt")
 					b(id="alto") Alto:
-				font(id="alto_val" size='1' style='font-size: 8pt' class="col-md-11") El estudiante demostró un nivel Avanzado por encima del nivel totalmente Competente, no quedaron aprendizajes en Progreso y su promedio final es mayor o igual a 98% y menor o igual a 130%
-				font(size='1' style="font-weight: bold; font-size: 8pt" class="col-md-1")
+				font.col-md-11(id="alto_val" size='1' style='font-size: 8pt') El estudiante demostró un nivel Avanzado por encima del nivel totalmente Competente, no quedaron aprendizajes en Progreso y su promedio final es mayor o igual a 98% y menor o igual a 130%
+				font.col-md-1(size='1' style="font-weight: bold; font-size: 8pt")
 					b(id="superior") Superior:
-				font(id="superior_val" size='1' style='font-size: 8pt' class="col-md-11") El estudiante demostró un nivel Magistral, por encima del Avanzado y totalmente Competente, no quedaron aprendizajes en Progreso y su promedio final es superior a 130%
+				font.col-md-11(id="superior_val" size='1' style='font-size: 8pt') El estudiante demostró un nivel Magistral, por encima del Avanzado y totalmente Competente, no quedaron aprendizajes en Progreso y su promedio final es superior a 130%
 				script.
 					var y = "#{year.year}";
 					var a = "#{year.course}";
@@ -264,7 +264,7 @@ html(lang="es" xml:lang="es")
 					};
 			.row
 				.col-md-12
-					p(class="col-md-12")
+					p.col-md-12
 					font(id="actual_date" style='font-size: 11pt')
 						script.
 							var f = new Date();
@@ -274,12 +274,12 @@ html(lang="es" xml:lang="es")
 			br
 			br
 			.row
-				p(class="col-md-6" align='CENTER')
+				p.col-md-6(align='CENTER')
 					font(size='2' style="font-weight: bold;")
 						b ALETIA PAOLA BOGOYA GONZÁLEZ
 					br
 					font(size='1', style='font-weight: bold; font-size: 9pt') Rectora
-				p(class="col-md-6" align='CENTER')
+				p.col-md-6(align='CENTER')
 					font(size='2' style="font-weight: bold;")
 						b NÉSTOR ARIAS TORRES
 					br

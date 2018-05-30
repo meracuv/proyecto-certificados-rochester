@@ -16,69 +16,69 @@ html(lang="es" xml:lang="es")
 		script(src='https://code.jquery.com/jquery-3.2.1.js')
 		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')
 	body
-		nav(class="navbar fixed-top navbar-expand-md bg-primary navbar-dark shadowed")
+		nav.navbar.fixed-top.navbar-expand-md.bg-primary.navbar-dark.shadowed
 			.container
-				button(class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar3SupportedContent" aria-controls="navbar3SupportedContent" aria-expanded="false" aria-label="Toggle navigation")
-					span(class="navbar-toggler-icon")
+				button.navbar-toggler.navbar-toggler-right(type="button" data-toggle="collapse" data-target="#navbar3SupportedContent" aria-controls="navbar3SupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+					span.navbar-toggler-icon
 				.collapse.navbar-collapse.text-center.justify-content-center#navbar3SupportedContent(style="font-weight: bold;")
-					ul(class="navbar-nav")
-						li(class="nav-item")
-							a(class="nav-link" href="/app") Inicio
+					ul.navbar-nav
+						li.nav-item
+							a.nav-link(href="/app") Inicio
 						li
-							a(class="nav-link" href="/app/imagenes") Mis creaciones
+							a.nav-link( href="/app/imagenes") Mis creaciones
 						li
-							a(data-toggle="modal" data-target="#new_student" class="nav-link text-secondary" href="") Crear Estudiante
+							a.nav-link.text-secondary(data-toggle="modal" data-target="#new_student" href="") Crear Estudiante
 						li
-							a(data-toggle="modal" data-target="#new_search" class="nav-link text-secondary" href="") Búsqueda
+							a.nav-link.text-secondary(data-toggle="modal" data-target="#new_search"  href="") Búsqueda
 						form(action="/closesession" method="POST")
 							button.ml-3.btn.btn-danger(type="submit") Cerrar Sesión
-		div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="new_student")
-			div(class="modal-dialog" role="document")
+		.modal( aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="new_student")
+			.modal-dialog(role="document")
 				.modal-content
 					.modal-header
-						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+						button.close(type="button" data-dismiss="modal" aria-label="Close")
 							span(aria-hidden="true") ×
 					.modal-body
 						.card.text-white.bg-primary
 							.card-body
-								h1(class="mb-4") Crear Estudiante
+								h1.mb-4 Crear Estudiante
 								form(action="/app/imagenes" method="POST" enctype="multipart/form-data")
 									.form-group
 										label(for="name") Nombre
-										input(type="text" name="name" placeholder="Nombre" id="name" class="form-control" onKeyUp="this.value=this.value.toUpperCase();")
+										input.form-control(type="text" name="name" placeholder="Nombre" id="name" onKeyUp="this.value=this.value.toUpperCase();")
 									.form-group
 										label(for="lastname") Apellido
-										input(type="text" name="lastname" placeholder="Apellido" id="lastname" class="form-control" onKeyUp="this.value=this.value.toUpperCase();")
+										input.form-control(type="text" name="lastname" placeholder="Apellido" id="lastname" onKeyUp="this.value=this.value.toUpperCase();")
 									.form-group
 										label(for="id_student") Id
-										input(type="number" name="id_student" placeholder="Id" id="id_student" class="form-control" onkeypress="return valida(event)")
-									button(type="submit" class="btn btn-secondary") Guardar
+										input.form-control(type="number" name="id_student" placeholder="Id" id="id_student"  onkeypress="return valida(event)")
+									button.btn.btn-secondary(type="submit" ) Guardar
 					.modal-footer
-						button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
-		div(class="modal" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="new_search")
-			div(class="modal-dialog" role="document")
+						button.btn.btn-secondary(type="button" data-dismiss="modal") Close
+		.modal(aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="new_search")
+			.modal-dialog(role="document")
 				.modal-content
 					.modal-header
-						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+						button.close(type="button" data-dismiss="modal" aria-label="Close")
 							span(aria-hidden="true") ×
 					.modal-body
 						.card.text-white.bg-primary
 							.card-body
 								h2 Buscar por:
-								form(class="m-0" action="/app/imagenes/name" method="POST" enctype="multipart/form-data")
+								form.m-0(action="/app/imagenes/name" method="POST" enctype="multipart/form-data")
 									.form-group
 										label(for="names") Estudiante
 										.input-group.mb-3
-											input(type="text" name="names" placeholder="Nombre(s), Apellido(s) o Id" id="names" class="form-control" onKeyUp="this.value=this.value.toUpperCase();" aria-describedby="basic-addon2")
+											input.form-control(type="text" name="names" placeholder="Nombre(s), Apellido(s) o Id" id="names" onKeyUp="this.value=this.value.toUpperCase();" aria-describedby="basic-addon2")
 											.input-group-append
-												button(class="btn btn-outline-secondary bg-light" type="submit") Buscar
-								form(class="m-0" action="/app/imagenes/years" method="POST" enctype="multipart/form-data")
+												button.btn.btn-outline-secondary.bg-light(type="submit") Buscar
+								form.m-0(action="/app/imagenes/years" method="POST" enctype="multipart/form-data")
 									.form-group
 										label(for="year") Año
 										.input-group.mb-3
-											select(type="text" name="year" placeholder="Año" id="allyears" class="form-control ")
+											select.form-control(type="text" name="year" placeholder="Año" id="allyears" )
 											.input-group-append
-												button(class="btn btn-outline-secondary bg-light" type="submit") Buscar
+												button.btn.btn-outline-secondary.bg-light(type="submit") Buscar
 					.modal-footer
-						button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+						button.btn.btn-secondary(type="button" data-dismiss="modal") Close
 		block contenido

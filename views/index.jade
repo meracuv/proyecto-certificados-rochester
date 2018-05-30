@@ -9,8 +9,8 @@ html(lang='es')
 		script(src="/socket.io/socket.io.js")
 		script(src="/public/js/handlebars.js")
 	body
-		div(class="col-md-8 remove-float center-block text-center big-top-space")
+		.col-md-8.remove-float.center-block.text-center.big-top-space
 			h1 Certificados Estudiantiles
-			a(href="/login" class="right-space") ºIniciar sesión (Login)
-			a(href="/eliminar_usuario" class="right-space") ºEliminar Usuario
+			a.right-space(href="/login") ºIniciar sesión (Login)
+			a.right-space(href="/eliminar_usuario") ºEliminar Usuario
 			a(href="/signup") ºRegistrarme
