@@ -9,16 +9,16 @@ html(lang='es')
 		script(src="/socket.io/socket.io.js")
 		script(src="/public/js/handlebars.js")
 	body
-		div(class="col-md-6 remove-float center-block big-top-space")
+		.col-md-6.remove-float.center-block.big-top-space
 			h1 Eliminar Usuario
 			form(action="/delete" method="POST")
-				div(class="container-fluid")
-					div(class="form-group")
+				.container-fluid
+					.form-group
 						label(for="email") Email
-						input(type="text" name="email" placeholder="Email" id="email" class="form-control")
-					div(class="form-group")
+						input.form-control(type="text" name="email" placeholder="Email" id="email")
+					.form-group
 						label(for="password") Contraseña
-						input(type="password" name="password" placeholder="Contraseña" id="password" class="form-control")
-					div(class="row top-space")
-						div(class="col-xs-12 col-sm-6")
-							input(type="submit" value="Eliminar" class="btn btn-primary")
+						input.form-control(type="password" name="password" placeholder="Contraseña" id="password" )
+					.row.top-space
+						.col-xs-12.col-sm-6
+							input.btn.btn-primary(type="submit" value="Eliminar" )
