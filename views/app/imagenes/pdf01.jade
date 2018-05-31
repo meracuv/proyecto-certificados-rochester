@@ -21,6 +21,8 @@ html(lang="es" xml:lang="es")
 				.collapse.navbar-collapse.text-center.justify-content-center#navbar3SupportedContent
 					ul.navbar-nav
 						li.nav-item
+							a.nav-link(href="/app") Inicio
+						li.nav-item
 							a.nav-link(href="javascript:pruebaDivAPdf()") Pasar a PDF
 								script.
 									function pruebaDivAPdf(){
@@ -113,7 +115,6 @@ html(lang="es" xml:lang="es")
 						for(primarias in primaria){
 							var item_primaria = primaria[primarias];
 							if(item_primaria.search(a) == -1 && item_eighth.search(y) != -1){
-								console.log("hola mundo")
 								document.getElementById("concepto").innerHTML = "El sistema de evaluación incluye calificaciones de Cero (0) a Diez (10) donde Cero representa la calificación más baja y Diez la más alta, siendo Seis (6) la calificación mínima para poder ser promovido";
 								document.getElementById("encabezado").innerHTML = "";
 								document.getElementById("bajo").innerHTML = "";
